@@ -1,0 +1,27 @@
+spring:
+  profiles:
+    active: local
+  batch:
+    job:
+      names: ${job.name:NONE}
+      # 원하는 job 만 실행도록 설정한다. 설정하지 않으면 기본적으로 모든 job 을 실행한다.
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: jdbc:mysql://localhost:3306/batch
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: batch
+    password: batch
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: none
+  batch:
+    jdbc:
+      initialize-schema: always
+      # 배치 스키마를 항상 초기화한다
